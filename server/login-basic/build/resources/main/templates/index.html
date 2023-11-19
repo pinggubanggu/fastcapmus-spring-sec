@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+
+<div class="container center-contents">
+    <div class="row">
+        <h1 class="title display-5"> 메인 페이지 </h1>
+    </div>
+
+<!--    sec:authorize="isAuthenticated()"는 로그인을 하고 난 상태에서만 메뉴를 보이게 하고 싶을 때 사용-->
+    <div class="link">
+        <a href="/login" sec:authorize="!isAuthenticated()">  로그인 </a>
+    </div>
+    <div class="link" sec:authorize="isAuthenticated()">
+        <a href="/user-page">  유저 페이지  </a>
+    </div>
+    <div class="link" sec:authorize="isAuthenticated()">
+        <a href="/admin-page">  관리자 로그인 </a>
+    </div>
+
+    <div class="link">
+        <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+            <button class="btn btn-info" type="submit">로그 아웃</button>
+        </form>
+    </div>
+
+</div>
+</div>
+<script th:src="@{/js/bootstrap.js}" />
+</body>
+</html>
+<div class="links">
